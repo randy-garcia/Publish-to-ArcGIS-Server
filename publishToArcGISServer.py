@@ -84,15 +84,13 @@ def createService():
     sddraft_filename = service + ".sddraft"
     sddraft_output_filename = os.path.join(outdir, sddraft_filename)
 
-    # Reference map to publisht
-    #aprx = arcpy.mp.ArcGISProject(r"C:\Users\emil9669\Desktop\portland.aprx")
+    # Reference map to publish
     aprx = aprxFile
     #print (aprxFile)
     m = aprx.listMaps(mapName)[0]
 
     # Create MapServiceDraft and set service properties
     service_draft = arcpy.sharing.CreateSharingDraft("STANDALONE_SERVER", "MAP_SERVICE", service, m)
-    #service_draft.targetServer = r"C:\Users\emil9669\Documents\ArcGIS\Projects\MyProject21\arcgis on mashupdev.esri.com (1).ags"
     service_draft.targetServer = serverFile
 
     # Create Service Definition Draft file
@@ -105,7 +103,6 @@ def createService():
 
     # Share to portal
     print("Uploading Service Definition...")
-    #arcpy.UploadServiceDefinition_server(sd_output_filename, r"C:\Users\emil9669\Documents\ArcGIS\Projects\MyProject21\arcgis on mashupdev.esri.com (1).ags")
     arcpy.UploadServiceDefinition_server(sd_output_filename, serverFile)
     print("Successfully Uploaded service.")
 
